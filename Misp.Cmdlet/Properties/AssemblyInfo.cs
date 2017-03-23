@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("MispLib")]
+[assembly: AssemblyTitle("MispCmdlet")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("MispLib")]
+[assembly: AssemblyProduct("MispCmdlet")]
 [assembly: AssemblyCopyright("Copyright ©  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("498e9f4b-e975-40d1-b562-c38a9496964c")]
+[assembly: Guid("19ce89ca-18b1-49ee-a7d4-a77305e6c792")]
 
 // Version information for an assembly consists of the following four values:
 //
