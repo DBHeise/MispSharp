@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,12 +7,36 @@ using System.Threading.Tasks;
 
 namespace Misp.Tests
 {
-    internal static class TestHelper
+    [TestClass]
+    public static class TestHelper
     {
         internal static String MispInstance = "http://misp.h2net.heiseink.com"; //Enter your MISP server here
         internal static String MispKey = "S36SAVjXcDh8WeFMJDPLwHUjMx3dJDdWHPvXGXPh"; //Enter your KEY here
 
         private static Random random = new Random((int)DateTime.Now.Ticks);
+
+        [AssemblyInitialize]
+        public static void OnTestStart(TestContext context) {
+        }
+        private static List<String> eventIds = new List<string>();
+        public static void AddEvent(string id) {
+            eventIds.Add(id);
+        }
+        public static void RemoveEvent(string id) {
+            if (eventIds.Contains(id))
+            {
+                eventIds.Remove(id);
+            }
+        }        
+
+        [AssemblyCleanup]
+        public static void OnTestComplete() {
+            MispServer server = new MispServer(TestHelper.MispInstance, TestHelper.MispKey);
+            foreach(var eventId in eventIds)
+            {
+                server.DeleteEvent(eventId);
+            }
+        }
 
         internal static String RandomString()
         {
