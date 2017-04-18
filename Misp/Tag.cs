@@ -38,59 +38,59 @@ namespace Misp
         /// <summary>
         /// id is a human-readable identifier that references the tag on the local instance. 
         /// </summary>
-        [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("id")]
         public String Id { get; set; }
 
         /// <summary>
         /// colour represents an RGB value of the tag.
         /// </summary>
-        [JsonProperty("colour", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("colour")]
         public String Color { get; set; }
 
         /// <summary>
         /// exportable represents a setting if the tag is kept local or exportable to other MISP instances.
         /// </summary>
-        [JsonProperty("exportable", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("exportable")]
         public Boolean? Exportable { get; set; }
 
         /// <summary>
         /// ??
         /// </summary>
-        [JsonProperty("org_id", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("org_id")]
         public Boolean? OrgOnly { get; set; }
 
         /// <summary>
         /// ??
         /// </summary>
-        [JsonProperty("hide_tag", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("hide_tag")]
         public Boolean? Hidden { get; set; }
 
         /// <summary>
         /// ??
         /// </summary>
-        [JsonProperty("count", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("count")]
         public uint? EventCount { get; set; }
 
         /// <summary>
         /// ??
         /// </summary>
-        [JsonProperty("attribute_count", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("attribute_count")]
         public uint? AttributeCount { get; set; }
 
         /// <summary>
         /// ??
         /// </summary>
-        [JsonProperty("favourite", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("favourite")]
         public Boolean? IsFavorite { get; set; }
 
         public override string ToString()
         {
-            return JsonConvert.SerializeObject(this);
+            return JsonConvert.SerializeObject(this, JsonHelper.Settings);
         }
 
         public static Tag FromJson(String json)
         {
-            return JsonConvert.DeserializeObject<Tag>(json);
+            return JsonConvert.DeserializeObject<Tag>(json, JsonHelper.Settings);
         }
 
     }
@@ -108,12 +108,12 @@ namespace Misp
         }
         public override string ToString()
         {
-            return JsonConvert.SerializeObject(this);
+            return JsonConvert.SerializeObject(this, JsonHelper.Settings);
         }
 
         public static TagWrapper FromJson(String json)
         {
-            return JsonConvert.DeserializeObject<TagWrapper>(json);
+            return JsonConvert.DeserializeObject<TagWrapper>(json, JsonHelper.Settings);
         }
 
     }

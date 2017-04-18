@@ -25,7 +25,7 @@ namespace Misp
         /// <summary>
         /// The uuid represents the Universally Unique IDentifier (UUID) [@!RFC4122] of the organization. The organization UUID is globally assigned to an organization and SHALL be kept overtime.
         /// </summary>
-        [JsonProperty("uuid"), JsonRequired]
+        [JsonProperty("uuid")]
         public Guid UUID { get; set; }
     }
 }

@@ -9,6 +9,20 @@ using System.Threading.Tasks;
 
 namespace Misp
 {
+    public class MispServerException : Exception
+    {
+        internal MispServerException() : base() { }
+        internal MispServerException(String msg, Exception inner) : base(msg, inner) { }
+        internal MispServerException(MispEventWrapper wrapper) : base(wrapper.Errors)
+        {
+            this.Name = wrapper.Name;
+            this.Url = wrapper.Url;            
+        }
+        public String Name { get; set; }
+        public String Url { get; set; }
+    }
+
+
     public class MispServer : RestServer
     {
         protected String key = null;
@@ -77,21 +91,65 @@ namespace Misp
             return request;
         }
 
+        private MispEvent handleResponse(String data)
+        {
+            var wrapper = MispEventWrapper.FromJson(data);
+            if (wrapper.Event != null)
+            {
+                return wrapper.Event;
+            }
+            else
+            {
+                throw new MispServerException(wrapper);
+            }
+        }
+
         public MispEvent AddEvent(MispEvent evnt) {
-           return MispEventWrapper.FromJson(this.Post("/events", new MispEventWrapper(evnt).ToString())).Event;
+           return handleResponse(this.Post("/events", new MispEventWrapper(evnt).ToString()));
         }
         public MispEvent GetEvent(String id) {
-            String data = this.Get("/events/" + id);
-            return MispEventWrapper.FromJson(data).Event;
+            try
+            {
+                return handleResponse(this.Get("/events/" + id));
+            }
+            catch (System.Net.WebException webException)
+            {
+                var r = (System.Net.HttpWebResponse)webException.Response;
+                if (r.StatusCode == HttpStatusCode.NotFound)
+                {
+                    throw new MispServerException("Not Found", webException);
+                }
+                else
+                    throw;
+            }
         }
 
-        public MispEvent[] GetEvents() { throw new NotImplementedException(); }
+        public MispEvent[] GetEvents()
+        {
+            var data = this.Get("/events");
+            return JsonConvert.DeserializeObject<MispEvent[]>(data, JsonHelper.Settings);
+        }
         public MispEvent[] GetEvents(String searchJson) { throw new NotImplementedException(); }
 
-        public void UpdateEvent(MispEvent evnt) { throw new NotImplementedException(); }
+        public MispEvent UpdateEvent(MispEvent evnt) {            
+            return handleResponse(this.Post("/events/" + evnt.Id, new MispEventWrapper(evnt).ToString()));
+        }
 
-        public void DeleteEvent(MispEvent evnt) { throw new NotImplementedException(); }
-        public void DeleteEvent(String id) { throw new NotImplementedException(); }
+        public void DeleteEvent(MispEvent evnt) {
+            this.DeleteEvent(evnt.Id);
+        }
+        public void DeleteEvent(String id) {
+            try
+            {
+                this.Delete("/events/" + id, null);
+            }
+            catch (System.Net.WebException webException)
+            {
+
+            }
+
+
+        }
 
     }
 }

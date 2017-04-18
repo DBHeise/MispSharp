@@ -34,7 +34,7 @@ using System.Runtime.InteropServices;
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
+
+[assembly: InternalsVisibleTo("Newtonsoft.Json")]
 [assembly: InternalsVisibleTo("Misp.Tests")]
-[assembly: InternalsVisibleTo("Misp.Explorables")]
-[assembly: InternalsVisibleTo("Misp.Tests1")]
 

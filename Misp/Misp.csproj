@@ -51,6 +51,7 @@
     <Compile Include="Enumerations.cs" />
     <Compile Include="Galaxy.cs" />
     <Compile Include="GalaxyCluster.cs" />
+    <Compile Include="JsonHelper.cs" />
     <Compile Include="Manifest.cs" />
     <Compile Include="MispEvent.cs" />
     <Compile Include="MispServer.cs" />

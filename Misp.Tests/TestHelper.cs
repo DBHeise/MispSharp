@@ -8,8 +8,8 @@ namespace Misp.Tests
 {
     internal static class TestHelper
     {
-        internal static String MispInstance = "http://misp.h2net.heiseink.com";
-        internal static String MispKey = "S36SAVjXcDh8WeFMJDPLwHUjMx3dJDdWHPvXGXPh";
+        internal static String MispInstance = "http://misp.h2net.heiseink.com"; //Enter your MISP server here
+        internal static String MispKey = "S36SAVjXcDh8WeFMJDPLwHUjMx3dJDdWHPvXGXPh"; //Enter your KEY here
 
         private static Random random = new Random((int)DateTime.Now.Ticks);
 
@@ -88,6 +88,16 @@ namespace Misp.Tests
                 }
             }
             return System.BitConverter.ToString(hashBytes).Replace("-", String.Empty);
+        }
+
+        internal static string RandomEmail()
+        {
+            return TestHelper.RandomString() + "@" + TestHelper.RandomString() + ".com";
+        }
+
+        internal static string RandomUrl()
+        {
+            return "http://" + TestHelper.RandomString() + "." + TestHelper.RandomString() + ".com/" + TestHelper.RandomSentance().Replace(' ', '/');
         }
     }
 }
