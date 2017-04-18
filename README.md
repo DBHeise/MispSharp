@@ -1,4 +1,4 @@
-*Warning code in ALPHA stages*
+*Warning code in BETA stages*
 # MISPSharp
 C# Library for MISP
 
