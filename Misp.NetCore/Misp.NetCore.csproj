@@ -11,6 +11,9 @@
     <Compile Include="..\Misp\Galaxy.cs" Link="Galaxy.cs" />
     <Compile Include="..\Misp\GalaxyCluster.cs" Link="GalaxyCluster.cs" />
     <Compile Include="..\Misp\JsonHelper.cs" Link="JsonHelper.cs" />
+    <Compile Include="..\Misp\MalwareSample.cs" Link="MalwareSample.cs" />
+    <Compile Include="..\Misp\MalwareSampleList.cs" Link="MalwareSampleList.cs" />
+    <Compile Include="..\Misp\MalwareSampleResponse.cs" Link="MalwareSampleResponse.cs" />
     <Compile Include="..\Misp\Manifest.cs" Link="Manifest.cs" />
     <Compile Include="..\Misp\MispEvent.cs" Link="MispEvent.cs" />
     <Compile Include="..\Misp\MispServer.cs" Link="MispServer.cs" />
