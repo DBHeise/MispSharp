@@ -49,9 +49,38 @@ namespace Misp
             return body;
         }
 
+        protected string Download(String relativeUri, String verb, String data)
+        {
+            HttpWebRequest request = NewRequest(relativeUri, verb);
+
+            if (!String.IsNullOrWhiteSpace(data))
+            {
+                byte[] dataBytes = Encoding.UTF8.GetBytes(data);
+                Stream reqStream = request.GetRequestStream();
+                reqStream.Write(dataBytes, 0, dataBytes.Length);
+                reqStream.Close();
+            }
+
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            string bodyString = "";
+            try
+            {
+                Stream resStream = response.GetResponseStream();
+
+                StreamReader bodyReader = new StreamReader(resStream);
+                bodyString = bodyReader.ReadToEnd();
+            }
+            catch (Exception e)
+            {
+                // TODO: manage exception
+            }
+            return bodyString;
+        }
+
         protected String Post(String relativeUri, String data) { return this.Do(relativeUri, "POST", data); }
         protected String Put(String relativeUri, String data) { return this.Do(relativeUri, "PUT", data); }
         protected String Get(String relativeUri) { return this.Do(relativeUri, "GET", null); }
+        protected string Download(String relativeUri) { return this.Download(relativeUri, "GET", null); }
         protected String Delete(String relativeUri, String data) { return this.Do(relativeUri, "DELETE", data); }
     }
 }

@@ -134,6 +134,12 @@ namespace Misp
         public MispEvent UpdateEvent(MispEvent evnt) {            
             return handleResponse(this.Post("/events/" + evnt.Id, new MispEventWrapper(evnt).ToString()));
         }
+        
+        public MalwareSampleResponse DownloadMalware(string md5)
+        {
+            string jsonResult = this.Download("attributes/downloadSample/" + md5);
+            return JsonConvert.DeserializeObject<MalwareSampleResponse>(jsonResult);
+        }
 
         public void DeleteEvent(MispEvent evnt) {
             this.DeleteEvent(evnt.Id);
