@@ -19,7 +19,7 @@ namespace Misp
         {
             this.Name = name;
         }
-        public Tag(String name, Color color, Boolean isExportable) : this(name, ColorTranslator.ToHtml(color), isExportable)
+        public Tag(String name, Color color, Boolean isExportable) : this(name, Misp.Drawing.ColorTranslator.ToHtml(color), isExportable)
         {
         }
         public Tag(String name, String color, Boolean isExportable) : this(name)
